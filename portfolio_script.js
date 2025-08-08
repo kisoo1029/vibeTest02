@@ -83,7 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateSlider() {
         const itemWidth = projectItems[0].offsetWidth; // Assuming all items have same width
+        console.log('itemWidth:', itemWidth);
         sliderTrack.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
+        console.log('transform:', sliderTrack.style.transform);
         updatePagination();
     }
 

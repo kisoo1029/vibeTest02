@@ -173,7 +173,9 @@ h2 {
 
 .slider-track {
     display: flex;
+    flex-wrap: nowrap; /* Explicitly set to nowrap */
     transition: transform 0.5s ease-in-out;
+    border: 2px solid red; /* For debugging */
 }
 
 .project-item {
@@ -189,6 +191,7 @@ h2 {
     align-items: center; /* 가운데 정렬 */
     justify-content: center; /* 가운데 정렬 */
     text-align: center; /* 텍스트 가운데 정렬 */
+    border: 2px solid blue; /* For debugging */
 }
 
 .project-item img {
