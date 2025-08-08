@@ -166,23 +166,24 @@ h2 {
 /* Projects */
 .slider-container {
     position: relative;
-    width: 100%;
+    width: 800px; /* Fixed width for debugging */
     overflow: hidden;
     margin: 0 auto;
+    background-color: rgba(255, 0, 0, 0.2); /* Debugging background */
 }
 
 .slider-track {
     display: flex;
     flex-wrap: nowrap; /* Explicitly set to nowrap */
     transition: transform 0.5s ease-in-out;
-    border: 2px solid red; /* For debugging */
+    background-color: rgba(0, 255, 0, 0.2); /* Debugging background */
 }
 
 .project-item {
-    flex: 0 0 100%; /* 각 슬라이드가 컨테이너 너비의 100%를 차지하도록 */
-    max-width: 100%; /* Ensure it doesn't exceed container width */
+    flex: 0 0 800px; /* Fixed width for debugging */
+    max-width: 800px; /* Ensure it doesn't exceed container width */
     box-sizing: border-box;
-    padding: 20px; /* Add padding for spacing */
+    /* padding: 20px; /* Add padding for spacing */ */
     background: rgba(255, 255, 255, 0.15);
     border-radius: 15px;
     overflow: hidden;
@@ -191,7 +192,7 @@ h2 {
     align-items: center; /* 가운데 정렬 */
     justify-content: center; /* 가운데 정렬 */
     text-align: center; /* 텍스트 가운데 정렬 */
-    border: 2px solid blue; /* For debugging */
+    background-color: rgba(0, 0, 255, 0.2); /* Debugging background */
 }
 
 .project-item img {
@@ -340,7 +341,7 @@ h2 {
     text-align: center;
 }
 
-section#projects .project-item {
+/* section#projects .project-item {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -359,4 +360,4 @@ section#projects.visible .project-item:nth-child(2) {
 }
 section#projects.visible .project-item:nth-child(3) {
     transition-delay: 0.3s;
-}
+} */
