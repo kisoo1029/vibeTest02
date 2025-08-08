@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         dynamicText.textContent = currentPhrase;
 
-        let typeSpeed = 150;
+        let typeSpeed = 100; // Adjusted typing speed
         if (isDeleting) {
-            typeSpeed /= 2;
+            typeSpeed = 50; // Faster deletion
         }
 
         if (!isDeleting && letterIndex === fullPhrase.length) {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isDeleting = false;
             phraseIndex = (phraseIndex + 1) % phrases.length;
         }
-
+        console.log(`typeSpeed: ${typeSpeed}, currentPhrase: ${currentPhrase}`);
         setTimeout(type, typeSpeed);
     }
 
