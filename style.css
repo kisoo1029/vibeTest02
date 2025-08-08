@@ -187,9 +187,9 @@ h2 {
     transform: translateY(-5px);
 }
 
-.project-item.project-nb {
-    /* Remove background image styles */
-}
+/*.project-item.project-nb {
+    /* Remove background image styles 
+}*/
 
 .project-item img {
     width: 100%;
