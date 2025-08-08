@@ -38,37 +38,50 @@ document.addEventListener('DOMContentLoaded', () => {
     let letterIndex = 0;
     let currentPhrase = "";
     let isDeleting = false;
+    let lastFrameTime = 0;
+    const typingDelay = 70; // milliseconds per character
+    const deletingDelay = 30; // milliseconds per character
+    const phrasePause = 2000; // milliseconds pause at end of phrase
 
-    function type() {
-        const fullPhrase = phrases[phraseIndex];
+    function type(currentTime) {
+        if (!lastFrameTime) lastFrameTime = currentTime;
+        const deltaTime = currentTime - lastFrameTime;
 
-        if (isDeleting) {
-            currentPhrase = fullPhrase.substring(0, letterIndex - 1);
-            letterIndex--;
-        } else {
-            currentPhrase = fullPhrase.substring(0, letterIndex + 1);
-            letterIndex++;
+        let delay = isDeleting ? deletingDelay : typingDelay;
+
+        if (deltaTime >= delay) {
+            const fullPhrase = phrases[phraseIndex];
+
+            if (isDeleting) {
+                currentPhrase = fullPhrase.substring(0, letterIndex - 1);
+                letterIndex--;
+            } else {
+                currentPhrase = fullPhrase.substring(0, letterIndex + 1);
+                letterIndex++;
+            }
+
+            dynamicText.textContent = currentPhrase;
+
+            if (!isDeleting && letterIndex === fullPhrase.length) {
+                // Pause at end of typing
+                setTimeout(() => {
+                    isDeleting = true;
+                    lastFrameTime = 0; // Reset for next animation frame
+                    requestAnimationFrame(type);
+                }, phrasePause);
+                return; // Stop current requestAnimationFrame loop for pause
+            } else if (isDeleting && letterIndex === 0) {
+                // Move to next phrase
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+            }
+            lastFrameTime = currentTime; // Update last frame time only when a character is typed/deleted
         }
 
-        dynamicText.textContent = currentPhrase;
-
-        let typeSpeed = 100; // Adjusted typing speed
-        if (isDeleting) {
-            typeSpeed = 50; // Faster deletion
-        }
-
-        if (!isDeleting && letterIndex === fullPhrase.length) {
-            typeSpeed = 2000; // Pause at end
-            isDeleting = true;
-        } else if (isDeleting && letterIndex === 0) {
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-        }
-        console.log(`typeSpeed: ${typeSpeed}, currentPhrase: ${currentPhrase}`);
-        setTimeout(type, typeSpeed);
+        requestAnimationFrame(type);
     }
 
-    type();
+    requestAnimationFrame(type);
 
     // Project Slider
     const sliderTrack = document.querySelector('.slider-track');
