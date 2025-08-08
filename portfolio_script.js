@@ -69,4 +69,88 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     type();
+
+    // Project Slider
+    const sliderTrack = document.querySelector('.slider-track');
+    const projectItems = document.querySelectorAll('.project-item');
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    const paginationContainer = document.querySelector('.slider-pagination');
+
+    let currentIndex = 0;
+    const totalSlides = projectItems.length;
+    let autoSlideInterval;
+
+    function updateSlider() {
+        const itemWidth = projectItems[0].offsetWidth; // Assuming all items have same width
+        sliderTrack.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
+        updatePagination();
+    }
+
+    function goToSlide(index) {
+        currentIndex = index;
+        if (currentIndex < 0) {
+            currentIndex = totalSlides - 1;
+        } else if (currentIndex >= totalSlides) {
+            currentIndex = 0;
+        }
+        updateSlider();
+    }
+
+    function nextSlide() {
+        goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+        goToSlide(currentIndex - 1);
+    }
+
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(nextSlide, 5000); // 5초마다 자동 슬라이드
+    }
+
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+
+    function updatePagination() {
+        paginationContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (i === currentIndex) {
+                dot.classList.add('active');
+            }
+            dot.addEventListener('click', () => {
+                stopAutoSlide();
+                goToSlide(i);
+                startAutoSlide();
+            });
+            paginationContainer.appendChild(dot);
+        }
+    }
+
+    // Event Listeners
+    prevButton.addEventListener('click', () => {
+        stopAutoSlide();
+        prevSlide();
+        startAutoSlide();
+    });
+
+    nextButton.addEventListener('click', () => {
+        stopAutoSlide();
+        nextSlide();
+        startAutoSlide();
+    });
+
+    // Initial setup
+    updateSlider();
+    startAutoSlide();
+
+    // Pause auto-slide on hover
+    sliderTrack.addEventListener('mouseenter', stopAutoSlide);
+    sliderTrack.addEventListener('mouseleave', startAutoSlide);
+
+    // Handle window resize
+    window.addEventListener('resize', updateSlider);
 });
