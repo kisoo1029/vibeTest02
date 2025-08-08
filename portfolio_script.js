@@ -83,13 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateSlider() {
         const itemWidth = projectItems[0].offsetWidth; // Assuming all items have same width
-        console.log('itemWidth:', itemWidth);
+        console.log('updateSlider: itemWidth:', itemWidth);
         sliderTrack.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
-        console.log('transform:', sliderTrack.style.transform);
+        console.log('updateSlider: transform:', sliderTrack.style.transform);
         updatePagination();
     }
 
     function goToSlide(index) {
+        console.log('goToSlide called with index:', index);
         currentIndex = index;
         if (currentIndex < 0) {
             currentIndex = totalSlides - 1;
@@ -100,18 +101,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function nextSlide() {
+        console.log('nextSlide called');
         goToSlide(currentIndex + 1);
     }
 
     function prevSlide() {
+        console.log('prevSlide called');
         goToSlide(currentIndex - 1);
     }
 
     function startAutoSlide() {
+        console.log('startAutoSlide called');
         autoSlideInterval = setInterval(nextSlide, 5000); // 5초마다 자동 슬라이드
     }
 
     function stopAutoSlide() {
+        console.log('stopAutoSlide called');
         clearInterval(autoSlideInterval);
     }
 
@@ -134,12 +139,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listeners
     prevButton.addEventListener('click', () => {
+        console.log('prevButton clicked');
         stopAutoSlide();
         prevSlide();
         startAutoSlide();
     });
 
     nextButton.addEventListener('click', () => {
+        console.log('nextButton clicked');
         stopAutoSlide();
         nextSlide();
         startAutoSlide();
