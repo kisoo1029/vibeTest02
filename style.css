@@ -259,7 +259,7 @@ h2 {
 }
 
 .glass-card p {
-    font-size: 1.8em;
+    font-size: 2.0em;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.8);
 }
@@ -267,4 +267,25 @@ h2 {
 .project-item.project-ing h3,
 .project-item.project-ing p {
     text-align: center;
+}
+
+section#projects .project-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+section#projects.visible .project-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+section#projects.visible .project-item:nth-child(1) {
+    transition-delay: 0.1s;
+}
+section#projects.visible .project-item:nth-child(2) {
+    transition-delay: 0.2s;
+}
+section#projects.visible .project-item:nth-child(3) {
+    transition-delay: 0.3s;
 }
