@@ -9,13 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Scroll animation for glass cards
-    const cards = document.querySelectorAll('.glass-card');
+    // Scroll animation for sections
+    const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
         });
@@ -23,11 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         threshold: 0.1
     });
 
-    cards.forEach(card => {
-        card.style.opacity = 0;
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-        observer.observe(card);
+    sections.forEach(section => {
+        observer.observe(section);
     });
 
     // Typing effect
