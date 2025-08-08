@@ -76,12 +76,8 @@ body {
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 40px;
+    padding: 40px 0; /* Keep some vertical padding */
     margin-bottom: 40px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
 .hero {
